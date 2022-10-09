@@ -10,20 +10,22 @@ public class Main {
     }
 
     public static boolean acceptParametrs(String login, String password, String confirmPassword) throws WrongPasswordException, WrongLoginException {
+        boolean logConfir;
+        boolean passConfir;
+        boolean logLenght;
+        boolean passLenght;
+        boolean confirmPass;
         try {
-            Confirmation(login);
-            Confirmation(password);
-            LoginLenghtConfirmation(login);
-            PasswordLenghtConfirmation(password);
-            ConfirmPasswordConfirmation(password, confirmPassword);
-        } catch (WrongLoginException e) {
-            System.out.println(e.getMessage());
-            return false;
-        } catch (WrongPasswordException e) {
+            logConfir = Confirmation(login);
+            passConfir = Confirmation(password);
+            logLenght = LoginLenghtConfirmation(login);
+            passLenght = PasswordLenghtConfirmation(password);
+            confirmPass = ConfirmPasswordConfirmation(password, confirmPassword);
+        } catch (WrongLoginException | WrongPasswordException e) {
             System.out.println(e.getMessage());
             return false;
         }
-        return true;
+        return logConfir && passConfir && logLenght && passLenght && confirmPass;
     }
 
     private static boolean Confirmation(String meaning) {
